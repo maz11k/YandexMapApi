@@ -58,15 +58,15 @@ while run:
             ll[1] += 7
     elif keys[pygame.K_DOWN]:
         if 19 >= z > 15:
-            ll[0] -= 0.001
+            ll[1] -= 0.001
         elif 15 >= z > 10:
-            ll[0] -= 0.01
+            ll[1] -= 0.01
         elif 10 >= z > 8:
-            ll[0] -= 0.1
+            ll[1] -= 0.1
         elif 8 >= z > 4:
-            ll[0] -= 1
+            ll[1] -= 1
         else:
-            ll[0] -= 7
+            ll[1] -= 7
     params = {
         "ll": str(ll[0]) + "," + str(ll[1]),
         "z": str(z),
