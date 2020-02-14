@@ -3,6 +3,7 @@ import sys
 import pygame
 import requests
 
+privet = 'hi'
 response = None
 params = {
     "ll": "37.622498,55.753227",
