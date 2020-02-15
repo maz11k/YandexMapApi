@@ -67,6 +67,13 @@ while run:
             ll[1] -= 1
         else:
             ll[1] -= 7
+    elif keys[pygame.K_m]:
+        l = "map"
+    elif keys[pygame.K_s]:
+        l = "sat"
+    elif keys[pygame.K_g]:
+        l = "sat,skl"
+
     params = {
         "ll": str(ll[0]) + "," + str(ll[1]),
         "z": str(z),
