@@ -73,6 +73,8 @@ while run:
         l = "sat"
     elif keys[pygame.K_g]:
         l = "sat,skl"
+    elif keys[pygame.K_p]:
+        l = "map,trf"
 
     params = {
         "ll": str(ll[0]) + "," + str(ll[1]),
