@@ -8,8 +8,14 @@ z = 9
 l = "map"
 ll = [37.622498, 55.753227]
 link = "https://static-maps.yandex.ru/1.x/"
-
 pygame.init()
+input_box = pygame.Rect(100, 100, 140, 32)
+color_inactive = pygame.Color('lightskyblue3')
+color_active = pygame.Color('dodgerblue2')
+font = pygame.font.Font(None, 32)
+color = color_inactive
+active = False
+text = ''
 screen = pygame.display.set_mode((600, 450))
 run = True
 while run:
@@ -17,7 +23,21 @@ while run:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if input_box.collidepoint(event.pos):
+                active = not active
+            else:
+                active = False
+            color = color_active if active else color_inactive
+        if event.type == pygame.KEYDOWN:
+            if active:
+                if event.key == pygame.K_RETURN:
+                    print(text)
+                    text = ''
+                elif event.key == pygame.K_BACKSPACE:
+                    text = text[:-1]
+                else:
+                    text += event.unicode
     keys = pygame.key.get_pressed()
     if keys[pygame.K_PAGEUP] and z < 19:
         z += 1
@@ -93,6 +113,13 @@ while run:
     with open(map_file, "wb") as file:
         file.write(response.content)
     screen.blit(pygame.image.load(map_file), (0, 0))
+    pygame.display.flip()
+    screen.fill((30, 30, 30))
+    txt_surface = font.render(text, True, color)
+    width = max(200, txt_surface.get_width() + 10)
+    input_box.w = width
+    screen.blit(txt_surface, (input_box.x + 5, input_box.y + 5))
+    pygame.draw.rect(screen, color, input_box, 2)
     pygame.display.flip()
     os.remove(map_file)
 pygame.quit()
